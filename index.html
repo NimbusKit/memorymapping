@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Fmemopen by jverkoey</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Fmemopen</h1>
+        <p class="header">fmemopen port for iOS and Mac OS X</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/jverkoey/fmemopen/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/jverkoey/fmemopen/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/jverkoey/fmemopen">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/jverkoey">jverkoey</a></p>
+
+
+      </header>
+      <section>
+        <h1>fmemopen for Mac OS and iOS</h1>
+
+<p>Originally ported from <a href="https://github.com/ingenuitas/python-tesseract/blob/master/fmemopen.c">ingenuitas python-tesseract</a>. Ported by Jeff Verkoeyen under the Apache 2.0 License.</p>
+
+<p>From the fmemopen man page:</p>
+
+<blockquote>
+<p>FILE *fmemopen(void *buf, size_t size, const char *mode);</p>
+
+<p>The fmemopen() function opens a stream that permits the access specified by mode. The stream
+allows I/O to be performed on the string or memory buffer pointed to by buf. This buffer must be
+at least size bytes long.</p>
+</blockquote>
+
+<p>Alas, this method does not exist on BSD operating systems (specifically Mac OS X and iOS). It is
+possible to recreate this functionality using a BSD-specific method called <code>funopen</code>.</p>
+
+<p>From the funopen man page:</p>
+
+<blockquote>
+<p>FILE * funopen(const void *cookie, int (*readfn)(void *, char *, int),
+               int (*writefn)(void *, const char *, int), fpos_t (*seekfn)(void *, fpos_t, int),
+               int (*closefn)(void *));</p>
+
+<p>The funopen() function associates a stream with up to four ``I/O functions''.  Either readfn or
+writefn must be specified; the others can be given as an appropriately-typed NULL pointer.  These
+I/O functions will be used to read, write, seek and close the new stream.</p>
+</blockquote>
+
+<p>fmemopen.c provides a simple implementation of fmemopen using funopen so that you can create FILE
+pointers to blocks of memory.</p>
+
+<h1>Adding it to your Project</h1>
+
+<p>Drag fmemopen.h and fmemopen.c to your project and add them to your target. <code>#include "fmemopen.h"</code>
+wherever you need to use <code>fmemopen</code>.</p>
+
+<h1>Examples</h1>
+
+<div class="highlight">
+<pre><span class="cp">#import "fmemopen.h"</span>
+
+<span class="n">NSString</span><span class="o">*</span> <span class="n">string</span> <span class="o">=</span> <span class="s">@"fmemopen in Objective-C"</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">cstr</span> <span class="o">=</span> <span class="p">[</span><span class="n">string</span> <span class="n">UTF8String</span><span class="p">];</span>
+<span class="n">FILE</span><span class="o">*</span> <span class="n">file</span> <span class="o">=</span> <span class="n">fmemopen</span><span class="p">((</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="n">cstr</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="s">"r"</span><span class="p">);</span>
+
+<span class="c1">// fread on file will now read the contents of the NSString</span>
+
+<span class="n">fclose</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>
+</pre>
+</div>
+
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+		
+  </body>
+</html>
