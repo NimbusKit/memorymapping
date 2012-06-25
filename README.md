@@ -1,6 +1,8 @@
 fmemopen for Mac OS and iOS
 ===========================
 
+Originally ported from [ingenuitas python-tesseract](https://github.com/ingenuitas/python-tesseract/blob/master/fmemopen.c). Ported by Jeff Verkoeyen under the Apache 2.0 License.
+
 From the fmemopen man page:
 
 > FILE *fmemopen(void *buf, size_t size, const char *mode);
