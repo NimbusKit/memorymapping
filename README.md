@@ -31,7 +31,7 @@ Adding it to your Project
 =========================
 
 Drag fmemopen.h and fmemopen.c to your project and add them to your target. `#include "fmemopen.h"`
-whereever you need to use `fmemopen`.
+wherever you need to use `fmemopen`.
 
 Examples
 ========
