@@ -48,6 +48,7 @@ static int writefn(void *handler, const char *buf, int size) {
     size = available;
   }
   memcpy(mem->buffer, buf, sizeof(char) * size);
+  mem->pos += size;
 
   return size;
 }
