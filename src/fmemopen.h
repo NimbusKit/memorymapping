@@ -1,5 +1,5 @@
 //
-// Copyright 2012 Jeff Verkoeyen
+// Copyright 2011-2014 NimbusKit
 // Originally ported from https://github.com/ingenuitas/python-tesseract/blob/master/fmemopen.c
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
