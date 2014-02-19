@@ -18,9 +18,8 @@
 #ifndef FMEMOPEN_H_
 #define FMEMOPEN_H_
 
-#ifdef __cplusplus
-extern "C"
-{
+#if defined __cplusplus
+extern "C" {
 #endif
 
 /**
@@ -36,12 +35,13 @@ extern "C"
  *
  * You must call fclose on the returned file pointer or memory will be leaked.
  *
- *      @param buf The data that will be used to back the FILE* methods. Must be at least
- *                 @c size bytes.
- *      @param size The size of the @c buf data.
- *      @param mode The permitted stream operation modes.
- *      @returns A pointer that can be used in the fread/fwrite/fseek/fclose family of methods.
- *               If a failure occurred NULL will be returned.
+ * @param buf The data that will be used to back the FILE* methods. Must be at least
+ *            @c size bytes.
+ * @param size The size of the @c buf data.
+ * @param mode The permitted stream operation modes.
+ * @return A pointer that can be used in the fread/fwrite/fseek/fclose family of methods.
+ *         If a failure occurred NULL will be returned.
+ * @ingroup NimbusMemoryMappping
  */
 FILE *fmemopen(void *buf, size_t size, const char *mode);
 
